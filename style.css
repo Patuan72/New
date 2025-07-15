@@ -1,0 +1,38 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+header, footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  background-color: #e0f7fa;
+}
+
+main {
+  height: 80vh;
+  padding: 10px;
+  overflow-y: auto;
+}
+
+footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+.content-box {
+  border: 1px solid #ccc;
+  padding: 10px;
+  min-height: 200px;
+}
+
+.hidden {
+  display: none;
+}
+
+#library {
+  padding: 10px;
+}
