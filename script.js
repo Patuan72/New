@@ -150,7 +150,7 @@ document.addEventListener("DOMContentLoaded", () => {
     link.addEventListener("click", async e => {
       e.preventDefault();
       try {
-        const res = await fetch(link.dataset.unit);
+        const res = await fetch("./" + link.dataset.unit);
         if (!res.ok) throw new Error("Not found");
         const data = await res.json();
         
