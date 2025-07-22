@@ -146,22 +146,86 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  document.querySelectorAll("#downloadedList a").forEach(link => {
+  
+  const unitFiles = ["unit1.json", "unit2.json"];
+  const downloadedList = document.getElementById("downloadedList");
+  downloadedList.innerHTML = "";
+  unitFiles.forEach(async (file) => {
+    const res = await fetch(file);
+    const data = await res.json();
+    const title = data.tieu_de || data.title || file;
+    const li = document.createElement("li");
+    const a = document.createElement("a");
+    a.href = "#";
+    a.dataset.unit = file;
+    a.textContent = title;
+    a.addEventListener("click", async e => {
+      e.preventDefault();
+      const res = await fetch(file);
+      const data = await res.json();
+      sentenceList.innerHTML = "";
+
+      if (Array.isArray(data.luyen_cau)) {
+        data.luyen_cau.forEach((item, i) => {
+          const div = document.createElement("div");
+          div.className = "sentence-item";
+          div.innerHTML = `<b>${i + 1}. ${item.en}</b><br/><small>${item.vi}</small>`;
+          div.addEventListener("click", () => {
+            currentSentence = item.en;
+            speakSentence(item.en);
+          });
+          sentenceList.appendChild(div);
+        });
+      } else if (Array.isArray(data.sentences)) {
+        data.sentences.forEach((sentence, i) => {
+          const div = document.createElement("div");
+          div.textContent = (i + 1) + ". " + sentence;
+          div.className = "sentence-item";
+          div.addEventListener("click", () => {
+            currentSentence = sentence;
+            speakSentence(sentence);
+          });
+          sentenceList.appendChild(div);
+        });
+      }
+
+      libraryPanel.classList.add("hidden");
+    });
+
+    li.appendChild(a);
+    downloadedList.appendChild(li);
+  });
+
     link.addEventListener("click", async e => {
       e.preventDefault();
       const res = await fetch(link.dataset.unit);
       const data = await res.json();
       sentenceList.innerHTML = "";
-      data.sentences.forEach((sentence, i) => {
-        const div = document.createElement("div");
-        div.textContent = (i + 1) + ". " + sentence;
-        div.className = "sentence-item";
-        div.addEventListener("click", () => {
-          currentSentence = sentence;
-          speakSentence(sentence);
+
+      if (Array.isArray(data.luyen_cau)) {
+        data.luyen_cau.forEach((item, i) => {
+          const div = document.createElement("div");
+          div.className = "sentence-item";
+          div.innerHTML = `<b>${i + 1}. ${item.en}</b><br/><small>${item.vi}</small>`;
+          div.addEventListener("click", () => {
+            currentSentence = item.en;
+            speakSentence(item.en);
+          });
+          sentenceList.appendChild(div);
         });
-        sentenceList.appendChild(div);
-      });
+      } else if (Array.isArray(data.sentences)) {
+        data.sentences.forEach((sentence, i) => {
+          const div = document.createElement("div");
+          div.textContent = (i + 1) + ". " + sentence;
+          div.className = "sentence-item";
+          div.addEventListener("click", () => {
+            currentSentence = sentence;
+            speakSentence(sentence);
+          });
+          sentenceList.appendChild(div);
+        });
+      }
+
       libraryPanel.classList.add("hidden");
     });
   });
