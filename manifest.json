@@ -1,0 +1,9 @@
+{
+  "name": "VPM - Luy\u1ec7n n\u00f3i offline",
+  "short_name": "VPM",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#ffffff",
+  "icons": []
+}
