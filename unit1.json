@@ -1,83 +1,66 @@
 {
-  "bai": 1,
-  "ten_bai": "Chào & Tạm biệt",
-  "tinh_huong": "Bạn gặp một người lần đầu. Hai bên chào hỏi và kết thúc bằng lời tạm biệt lịch sự.",
-  "hoi_thoai_tieng_viet": [
+  "unitTitle": "1. Chào & Tạm biệt",
+  "situation": "Bạn gặp một người lạ lần đầu tiên và cần chào hỏi hoặc tạm biệt họ một cách lịch sự.",
+  "conversation": [
     {
-      "A": "Chào bạn!"
+      "vi": "Xin chào!",
+      "en": "Hello!",
+      "voice": "male"
     },
     {
-      "B": "Chào bạn!"
+      "vi": "Chào bạn.",
+      "en": "Hi there!",
+      "voice": "female"
     },
     {
-      "A": "Tạm biệt!"
+      "vi": "Tạm biệt!",
+      "en": "Goodbye!",
+      "voice": "male"
     },
     {
-      "B": "Hẹn gặp lại!"
+      "vi": "Hẹn gặp lại!",
+      "en": "See you later!",
+      "voice": "female"
     }
   ],
-  "hoi_thoai_tieng_anh": [
+  "sentence_practice": [
     {
-      "A": "Hello!",
-      "IPA": "/həˈloʊ/"
+      "vi": "Xin chào!",
+      "en": "Hello!",
+      "ipa": "həˈləʊ",
+      "vpm": "hờ-lâu"
     },
     {
-      "B": "Hello!",
-      "IPA": "/həˈloʊ/"
-    },
-    {
-      "A": "Goodbye!",
-      "IPA": "/ɡʊdˈbaɪ/"
-    },
-    {
-      "B": "See you again!",
-      "IPA": "/siː ju əˈɡɛn/"
+      "vi": "Tạm biệt!",
+      "en": "Goodbye!",
+      "ipa": "ɡʊdˈbaɪ",
+      "vpm": "gút-bai"
     }
   ],
-  "luyen_cau": [
+  "vocabulary": [
     {
-      "tieng_viet": "Chào bạn!",
-      "tieng_anh": "Hello!",
-      "IPA": "/həˈloʊ/",
-      "VPM": "hơ–lâu"
+      "vi": "Xin chào",
+      "en": "Hello",
+      "ipa": "həˈləʊ",
+      "vpm": "hờ-lâu"
     },
     {
-      "tieng_viet": "Tạm biệt!",
-      "tieng_anh": "Goodbye!",
-      "IPA": "/ɡʊdˈbaɪ/",
-      "VPM": "gút–bai"
-    }
-  ],
-  "tu_vung": [
-    {
-      "tieng_viet": "chào",
-      "tieng_anh": "hello",
-      "IPA": "/həˈloʊ/",
-      "VPM": "hơ–lâu"
+      "vi": "Chào",
+      "en": "Hi",
+      "ipa": "haɪ",
+      "vpm": "hai"
     },
     {
-      "tieng_viet": "bạn",
-      "tieng_anh": "you",
-      "IPA": "/juː/",
-      "VPM": "diu"
+      "vi": "Tạm biệt",
+      "en": "Goodbye",
+      "ipa": "ɡʊdˈbaɪ",
+      "vpm": "gút-bai"
     },
     {
-      "tieng_viet": "tạm biệt",
-      "tieng_anh": "goodbye",
-      "IPA": "/ɡʊdˈbaɪ/",
-      "VPM": "gút–bai"
-    },
-    {
-      "tieng_viet": "gặp",
-      "tieng_anh": "meet",
-      "IPA": "/miːt/",
-      "VPM": "mit"
-    },
-    {
-      "tieng_viet": "lại",
-      "tieng_anh": "again",
-      "IPA": "/əˈɡɛn/",
-      "VPM": "ơ–ghen"
+      "vi": "Hẹn gặp lại",
+      "en": "See you later",
+      "ipa": "siː juː ˈleɪtə",
+      "vpm": "xi diu lây-tờ"
     }
   ]
 }

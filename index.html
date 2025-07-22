@@ -2,47 +2,50 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>VPM</title>
-  <link rel="stylesheet" href="style.css" />
-  <script src="https://cdn.jsdelivr.net/npm/meyda/dist/web/meyda.min.js"></script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Giáo trình Giao tiếp</title>
+    <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <header>
-    <div class="logo">VPM</div>
-    <div class="score">85</div>
-    <div class="speed-selector">
-      <span class="dot selected">●</span>
-      <span class="dot">●</span>
-      <span class="dot">●</span>
-    </div>
-    <div class="menu-icon" id="menuBtn">☰</div>
-  </header>
+    <header>
+        <h1>Tiếng Anh Giao Tiếp</h1>
+        <nav>
+            <ul id="downloadedList">
+                <li><a href="#" data-unit="unit1.json">1. Chào & Tạm biệt</a></li>
+                <li><a href="#" data-unit="unit2.json">2. Xin lỗi & Cảm ơn</a></li>
+            </ul>
+        </nav>
+    </header>
 
-  <main>
-    <div id="sentenceList"></div>
-    <div id="transcript" style="margin-top:10px; font-size:16px; color:#00796b;"></div>
-  </main>
+    <main>
+        <section>
+            <h2 id="unitTitle"></h2>
+            <p id="unitSituation"></p>
+        </section>
 
-  <footer>
-    <button class="icon" id="replay"><i class="bi bi-arrow-repeat"></i></button>
-    <button class="icon" id="mic"><i class="bi bi-mic"></i></button>
-    <button class="icon" id="save"><i class="bi bi-download"></i></button>
-  </footer>
+        <section>
+            <h3>Hội thoại</h3>
+            <div id="conversation" class="content-box"></div>
+        </section>
 
-  <div id="library" class="hidden">
-    <div class="library-content">
-      <button id="backBtn" class="back-btn">⬅️ Quay lại</button>
-      <h3>📚 Giáo trình</h3>
-      <ul id="downloadedList">
-        <li><a href="#" data-unit="unit1.json">1. Chào & Tạm biệt</a></li>
-        <li><a href="#" data-unit="unit2.json">2. Xin lỗi & Cảm ơn</a></li>
-      </ul>
-    </div>
-  </div>
+        <section>
+            <h3>Luyện câu</h3>
+            <div id="sentencePractice" class="content-box"></div>
+        </section>
 
-  <script src="script.js"></script>
+        <section>
+            <h3>Từ vựng</h3>
+            <ul id="vocabularyList"></ul>
+        </section>
+    </main>
+
+    <footer>
+        <button id="replayButton">🔁</button>
+        <button id="micButton">🎤</button>
+        <button id="saveButton">💾</button>
+    </footer>
+
+    <script src="script.js"></script>
 </body>
 </html>
