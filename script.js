@@ -1,201 +1,82 @@
 
-document.addEventListener("DOMContentLoaded", () => {
-  const micBtn = document.getElementById("mic");
-  const replayBtn = document.getElementById("replay");
-  const saveBtn = document.getElementById("save");
-  const transcriptBox = document.getElementById("transcript");
-  const scoreBox = document.querySelector(".score");
-  const sentenceList = document.getElementById("sentenceList");
-  const menuBtn = document.getElementById("menuBtn");
-  const libraryPanel = document.getElementById("library");
-  const backBtn = document.getElementById("backBtn");
-  const micIcon = micBtn.querySelector("i");
-  const replayIcon = replayBtn.querySelector("i");
+document.addEventListener("DOMContentLoaded", function () {
+  const contentBox = document.getElementById("content");
 
-  let currentSentence = "";
-  let currentRate = 1.0;
-  let audioBlob = null;
-  let mediaRecorder;
-  let audioChunks = [];
-  let isRecording = false;
+  function renderSection(title, rows, headers) {
+    const section = document.createElement("section");
+    const h2 = document.createElement("h2");
+    h2.textContent = title;
+    h2.style.fontSize = "16px";
+    h2.style.fontWeight = "bold";
+    section.appendChild(h2);
 
-  menuBtn.addEventListener("click", () => {
-    libraryPanel.classList.remove("hidden");
-  });
+    const table = document.createElement("table");
+    table.style.width = "100%";
+    table.style.borderCollapse = "collapse";
 
-  backBtn.addEventListener("click", () => {
-    libraryPanel.classList.add("hidden");
-  });
-
-  micBtn.addEventListener("click", async () => {
-    if (!currentSentence) {
-      alert("Hãy chọn một câu trước khi ghi âm.");
-      return;
-    }
-
-    if (!isRecording) {
-      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-      mediaRecorder = new MediaRecorder(stream);
-      audioChunks = [];
-      transcriptBox.textContent = "🔴 Đang ghi âm... (bấm để dừng)";
-      isRecording = true;
-      micIcon.className = "bi bi-record-circle";
-
-      mediaRecorder.ondataavailable = e => {
-        if (e.data.size > 0) audioChunks.push(e.data);
-      };
-
-      mediaRecorder.onstop = () => {
-        isRecording = false;
-        micIcon.className = "bi bi-mic";
-        transcriptBox.textContent = "⏳ Đang chấm điểm...";
-
-        const audioBlobTemp = new Blob(audioChunks, { type: "audio/wav" });
-        audioBlob = audioBlobTemp;
-
-        const reader = new FileReader();
-        reader.onload = async () => {
-          const audioContext = new AudioContext();
-          const buffer = await audioContext.decodeAudioData(reader.result);
-          const offlineSource = audioContext.createBufferSource();
-          offlineSource.buffer = buffer;
-
-          const analyser = Meyda.createMeydaAnalyzer({
-            audioContext: audioContext,
-            source: offlineSource,
-            bufferSize: 1024,
-            featureExtractors: ['rms', 'zcr', 'spectralFlatness', 'spectralCentroid', 'mfcc']
-          });
-
-          offlineSource.connect(audioContext.destination);
-
-          setTimeout(() => {
-            const features = analyser.get();
-            function safeNumber(x) {
-              return (typeof x === "number" && !isNaN(x)) ? x : 0;
-            }
-
-            if (features) {
-              const rms = safeNumber(features.rms);
-              const zcr = safeNumber(features.zcr);
-              const flat = safeNumber(features.spectralFlatness);
-              const centroid = safeNumber(features.spectralCentroid);
-              const mfcc = Array.isArray(features.mfcc) ? features.mfcc : [];
-              let score = 0;
-
-              let rmsScore = Math.min(1, rms / 0.05) * 20;
-              let zcrScore = Math.max(0, 1 - zcr / 0.2) * 15;
-              let flatScore = Math.max(0, 1 - flat / 0.5) * 15;
-              let centroidScore = (centroid > 200 && centroid < 2000) ? 20 : 10;
-              let mfccScore = mfcc.length > 0 ? 10 : 0;
-
-              score = rmsScore + zcrScore + flatScore + centroidScore + mfccScore;
-              scoreBox.textContent = Math.round(score);
-            } else {
-              scoreBox.textContent = "0";
-            }
-
-            const audio = new Audio(URL.createObjectURL(audioBlob));
-            transcriptBox.textContent = "🔊 Đang phát lại...";
-            replayIcon.className = "bi bi-volume-up";
-            audio.play();
-
-            audio.onended = () => {
-              replayIcon.className = "bi bi-arrow-repeat";
-              transcriptBox.textContent = "";
-            };
-
-            stream.getTracks().forEach(track => track.stop());
-          }, 1000);
-        };
-
-        reader.readAsArrayBuffer(audioBlob);
-      };
-
-      mediaRecorder.start();
-    } else {
-      mediaRecorder.stop();
-    }
-  });
-
-  replayBtn.addEventListener("click", () => {
-    if (!audioBlob) return alert("Chưa có bản ghi.");
-    const audio = new Audio(URL.createObjectURL(audioBlob));
-    transcriptBox.textContent = "🔊 Đang phát lại...";
-    replayIcon.className = "bi bi-volume-up";
-    audio.play();
-    audio.onended = () => {
-      replayIcon.className = "bi bi-arrow-repeat";
-      transcriptBox.textContent = "";
-    };
-  });
-
-  saveBtn.addEventListener("click", () => {
-    if (!audioBlob) return alert("Chưa có bản ghi để lưu.");
-    const a = document.createElement("a");
-    a.href = URL.createObjectURL(audioBlob);
-    a.download = "recording.wav";
-    a.click();
-  });
-
-  document.querySelectorAll(".dot").forEach((dot, index) => {
-    dot.addEventListener("click", () => {
-      document.querySelectorAll(".dot").forEach(d => d.classList.remove("selected"));
-      dot.classList.add("selected");
-      currentRate = [0.6, 1.0, 1.4][index];
-    });
-  });
-
-  document.querySelectorAll("#downloadedList a").forEach(link => {
-    link.addEventListener("click", async e => {
-      e.preventDefault();
-      const res = await fetch(link.dataset.unit);
-      const data = await res.json();
-      sentenceList.innerHTML = "";
-      data.sentences.forEach((sentence, i) => {
-        const div = document.createElement("div");
-        div.textContent = (i + 1) + ". " + sentence;
-        div.className = "sentence-item";
-        div.addEventListener("click", () => {
-          currentSentence = sentence;
-          speakSentence(sentence);
-        });
-        sentenceList.appendChild(div);
+    if (headers) {
+      const headerRow = document.createElement("tr");
+      headers.forEach(h => {
+        const th = document.createElement("th");
+        th.textContent = h;
+        th.style.textAlign = "left";
+        th.style.borderBottom = "1px solid #ccc";
+        th.style.padding = "4px";
+        headerRow.appendChild(th);
       });
-      libraryPanel.classList.add("hidden");
+      table.appendChild(headerRow);
+    }
+
+    rows.forEach(row => {
+      const tr = document.createElement("tr");
+      Object.values(row).forEach(text => {
+        const td = document.createElement("td");
+        td.textContent = text;
+        td.style.padding = "4px";
+        tr.appendChild(td);
+      });
+      table.appendChild(tr);
     });
-  });
 
-  function speakSentence(sentence) {
-    const utterance = new SpeechSynthesisUtterance(sentence);
-    utterance.lang = "en-US";
-    utterance.rate = currentRate;
-    speechSynthesis.speak(utterance);
+    section.appendChild(table);
+    contentBox.appendChild(section);
   }
+
+  fetch("unit1.json")
+    .then(response => response.json())
+    .then(data => {
+      contentBox.innerHTML = "";
+
+      if (data.tieu_de) {
+        const title = document.createElement("h1");
+        title.textContent = data.tieu_de;
+        title.style.fontSize = "18px";
+        title.style.marginBottom = "10px";
+        contentBox.appendChild(title);
+      }
+
+      if (data.tinh_huong) {
+        const p = document.createElement("p");
+        p.textContent = "🟢 Tình huống: " + data.tinh_huong;
+        p.style.fontStyle = "italic";
+        p.style.marginBottom = "10px";
+        contentBox.appendChild(p);
+      }
+
+      if (data.hoi_thoai) {
+        renderSection("💬 Hội thoại", data.hoi_thoai, ["🇻🇳", "🇺🇸", "IPA"]);
+      }
+
+      if (data.luyen_cau) {
+        renderSection("🗣️ Luyện câu", data.luyen_cau, ["🇻🇳", "🇺🇸", "IPA", "VPM"]);
+      }
+
+      if (data.tu_vung) {
+        renderSection("📚 Từ vựng", data.tu_vung, ["🇻🇳", "🇺🇸", "IPA", "VPM"]);
+      }
+    })
+    .catch(error => {
+      contentBox.textContent = "Không thể tải nội dung bài học.";
+      console.error("Lỗi khi tải unit1.json:", error);
+    });
 });
-
-
-
-// 🆕 Thêm nội dung từ unit1.json vào phần nội dung nếu tồn tại container tương ứng
-fetch('unit1.json')
-  .then(response => response.json())
-  .then(data => {
-    const container = document.getElementById('unit-container') || document.getElementById('content') || document.body;
-
-    const section = document.createElement('section');
-    section.innerHTML = `
-      <h2>${data.tieu_de}</h2>
-      <h3>💬 Tình huống</h3>
-      <p>${data.tinh_huong}</p>
-
-      <h3>💬 Hội thoại</h3>
-      ${data.hoi_thoai.map(c => `<p>${c.vn}<br><strong>${c.en}</strong></p>`).join('')}
-
-      <h3>🗣️ Luyện câu</h3>
-      ${data.luyen_cau.map(c => `<p>${c.vi} – <strong>${c.en}</strong><br><em>${c.ipa}</em> – ${c.vpm}</p>`).join('')}
-
-      <h3>📚 Từ vựng</h3>
-      ${data.tu_vung.map(c => `<p>${c.vi} – <strong>${c.en}</strong> – ${c.ipa} – ${c.vpm}</p>`).join('')}
-    `;
-    container.appendChild(section);
-  });
