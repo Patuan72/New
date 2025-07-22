@@ -1,8 +1,83 @@
 {
-  "title": "Unit 1: Greetings",
-  "sentences": [
-    "Hello!",
-    "How are you?",
-    "I'm fine, thank you."
+  "bai": 1,
+  "ten_bai": "Chào & Tạm biệt",
+  "tinh_huong": "Bạn gặp một người lần đầu. Hai bên chào hỏi và kết thúc bằng lời tạm biệt lịch sự.",
+  "hoi_thoai_tieng_viet": [
+    {
+      "A": "Chào bạn!"
+    },
+    {
+      "B": "Chào bạn!"
+    },
+    {
+      "A": "Tạm biệt!"
+    },
+    {
+      "B": "Hẹn gặp lại!"
+    }
+  ],
+  "hoi_thoai_tieng_anh": [
+    {
+      "A": "Hello!",
+      "IPA": "/həˈloʊ/"
+    },
+    {
+      "B": "Hello!",
+      "IPA": "/həˈloʊ/"
+    },
+    {
+      "A": "Goodbye!",
+      "IPA": "/ɡʊdˈbaɪ/"
+    },
+    {
+      "B": "See you again!",
+      "IPA": "/siː ju əˈɡɛn/"
+    }
+  ],
+  "luyen_cau": [
+    {
+      "tieng_viet": "Chào bạn!",
+      "tieng_anh": "Hello!",
+      "IPA": "/həˈloʊ/",
+      "VPM": "hơ–lâu"
+    },
+    {
+      "tieng_viet": "Tạm biệt!",
+      "tieng_anh": "Goodbye!",
+      "IPA": "/ɡʊdˈbaɪ/",
+      "VPM": "gút–bai"
+    }
+  ],
+  "tu_vung": [
+    {
+      "tieng_viet": "chào",
+      "tieng_anh": "hello",
+      "IPA": "/həˈloʊ/",
+      "VPM": "hơ–lâu"
+    },
+    {
+      "tieng_viet": "bạn",
+      "tieng_anh": "you",
+      "IPA": "/juː/",
+      "VPM": "diu"
+    },
+    {
+      "tieng_viet": "tạm biệt",
+      "tieng_anh": "goodbye",
+      "IPA": "/ɡʊdˈbaɪ/",
+      "VPM": "gút–bai"
+    },
+    {
+      "tieng_viet": "gặp",
+      "tieng_anh": "meet",
+      "IPA": "/miːt/",
+      "VPM": "mit"
+    },
+    {
+      "tieng_viet": "lại",
+      "tieng_anh": "again",
+      "IPA": "/əˈɡɛn/",
+      "VPM": "ơ–ghen"
+    }
   ]
 }
