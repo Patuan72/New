@@ -1,0 +1,70 @@
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VPM</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/meyda/dist/web/meyda.min.js"></script>
+  <link rel="manifest" href="manifest.json">
+</head>
+<body>
+  <header>
+    <div class="logo">VPM</div>
+    <div class="score">85</div>
+    <div class="speed-selector">
+      <span class="dot selected">●</span>
+      <span class="dot">●</span>
+      <span class="dot">●</span>
+    </div>
+    <div class="menu-icon" id="menuBtn">☰</div>
+  </header>
+
+  <main>
+    <div id="sentenceList"></div>
+    <div id="transcript" style="margin-top:10px; font-size:16px; color:#00796b;"></div>
+  </main>
+
+  <footer>
+    <button class="icon" id="replay"><i class="bi bi-arrow-repeat"></i></button>
+    <button class="icon" id="mic"><i class="bi bi-mic"></i></button>
+    <button class="icon" id="save"><i class="bi bi-download"></i></button>
+  </footer>
+
+  <div id="library" class="hidden">
+    <div class="library-content">
+      <button id="backBtn" class="back-btn">⬅️ Quay lại</button>
+      <h3>📚 Giáo trình</h3>
+      <ul id="downloadedList">
+<li><a href="#" data-unit="unit1.json">Bài 1: Chào & Tạm biệt</a></li>
+<li><a href="#" data-unit="unit2.json">Bài 2: Xin lỗi & Cảm ơn</a></li>
+<li><a href="#" data-unit="unit3.json">Bài 3: Số đếm & Hỏi giờ</a></li>
+<li><a href="#" data-unit="unit4.json">Bài 4: Giới thiệu & Hỏi tên</a></li>
+<li><a href="#" data-unit="unit5.json">Bài 5: Có / Không / Không biết</a></li>
+<li><a href="#" data-unit="unit6.json">Bài 6: Hỏi giá & Đắt / Rẻ</a></li>
+<li><a href="#" data-unit="unit7.json">Bài 7: Chỉ đường đơn giản</a></li>
+<li><a href="#" data-unit="unit8.json">Bài 8: Gọi món & Đồ ăn, uống gì</a></li>
+<li><a href="#" data-unit="unit9.json">Bài 9: Gọi trong tình huống khẩn cấp</a></li>
+<li><a href="#" data-unit="unit10.json">Bài 10: Đi lại – Taxi / Bus / Đến đâu</a></li>
+<li><a href="#" data-unit="unit11.json">Bài 11: Ở khách sạn – Hỏi phòng / wifi</a></li>
+<li><a href="#" data-unit="unit12.json">Bài 12: Mua đồ – Kích cỡ / Màu / Trả tiền</a></li>
+<li><a href="#" data-unit="unit13.json">Bài 13: Toilet / Nước uống / Đồ dùng thiết yếu</a></li>
+<li><a href="#" data-unit="unit14.json">Bài 14: Nhờ gọi điện / Gọi số này</a></li>
+<li><a href="#" data-unit="unit15.json">Bài 15: Phản xạ nhanh & Câu cảm thán</a></li>
+</ul>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('service-worker.js')
+        .then(() => console.log('✅ Service Worker registered'))
+        .catch(error => console.error('❌ SW registration failed:', error));
+    }
+  </script>
+</body>
+</html>
