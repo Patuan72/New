@@ -153,8 +153,16 @@ document.addEventListener("DOMContentLoaded", () => {
         const res = await fetch(link.dataset.unit);
         if (!res.ok) throw new Error("Not found");
         const data = await res.json();
-        sentenceList.innerHTML = "";
-        data.sentences.forEach((sentence, i) => {
+        
+      sentenceList.innerHTML = "";
+      if (data.dialogue && Array.isArray(data.dialogue)) {
+        const dialogueBox = document.createElement("div");
+        dialogueBox.style = "margin-bottom:10px; padding:8px; background:#f0f0f0; border-left: 4px solid #2196F3; font-size:15px;";
+        dialogueBox.innerHTML = "<b>🗣 Hội thoại:</b><br>" + data.dialogue.map(line => "• " + line).join("<br>");
+        sentenceList.appendChild(dialogueBox);
+      }
+      data.sentences.forEach
+    ((sentence, i) => {
           const div = document.createElement("div");
           div.textContent = (i + 1) + ". " + sentence;
           div.className = "sentence-item";
@@ -167,8 +175,16 @@ document.addEventListener("DOMContentLoaded", () => {
       } catch (e) {
         sentenceList.innerHTML = "<div style='color:red; font-size:16px;'>⛔ Chưa có nội dung cho bài này.</div>";
       }
+      
       sentenceList.innerHTML = "";
-      data.sentences.forEach((sentence, i) => {
+      if (data.dialogue && Array.isArray(data.dialogue)) {
+        const dialogueBox = document.createElement("div");
+        dialogueBox.style = "margin-bottom:10px; padding:8px; background:#f0f0f0; border-left: 4px solid #2196F3; font-size:15px;";
+        dialogueBox.innerHTML = "<b>🗣 Hội thoại:</b><br>" + data.dialogue.map(line => "• " + line).join("<br>");
+        sentenceList.appendChild(dialogueBox);
+      }
+      data.sentences.forEach
+    ((sentence, i) => {
         const div = document.createElement("div");
         div.textContent = (i + 1) + ". " + sentence;
         div.className = "sentence-item";
