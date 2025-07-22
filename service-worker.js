@@ -2,6 +2,8 @@ self.addEventListener('install', function(e) {
   e.waitUntil(
     caches.open('pwa-cache').then(function(cache) {
       return cache.addAll([
+    './service-worker.js',
+    'https://cdn.jsdelivr.net/npm/meyda/dist/web/meyda.min.js',
         './index.html',
         './style.css',
         './script.js',
