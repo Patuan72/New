@@ -1,40 +1,12 @@
 {
-  "title": "Bài 1: Chào hỏi",
+  "title": "Bài 1 – Chào hỏi",
   "sentences": [
-    {
-      "text": "Hello!",
-      "mean": "Xin chào!",
-      "ipa": "/həˈloʊ/",
-      "vpm": "/hờ - lấu/",
-      "audio": "hello.mp3"
-    },
-    {
-      "text": "Hi, how are you?",
-      "mean": "Chào, bạn khỏe không?",
-      "ipa": "/haɪ haʊ ɑːr juː/",
-      "vpm": "/hai - hao - a(r) - diu/",
-      "audio": "hi_how_are_you.mp3"
-    },
-    {
-      "text": "Good morning.",
-      "mean": "Chào buổi sáng.",
-      "ipa": "/ɡʊd ˈmɔːrnɪŋ/",
-      "vpm": "/gụt - mo(r)-nình/",
-      "audio": "good_morning.mp3"
-    },
-    {
-      "text": "Nice to meet you.",
-      "mean": "Rất vui được gặp bạn.",
-      "ipa": "/naɪs tuː miːt juː/",
-      "vpm": "/nai - thu - mít - diu/",
-      "audio": "nice_to_meet_you.mp3"
-    },
-    {
-      "text": "See you later.",
-      "mean": "Hẹn gặp lại.",
-      "ipa": "/siː juː ˈleɪtər/",
-      "vpm": "/xi - diu - lây-tờ/",
-      "audio": "see_you_later.mp3"
-    }
+    "Hello!",
+    "Hi.",
+    "Goodbye!",
+    "See you!",
+    "Chào bạn!",
+    "Tạm biệt!",
+    "Hẹn gặp lại!"
   ]
 }
