@@ -1,8 +1,79 @@
 {
   "id": "unit1",
   "ten_bai": "Chào & Tạm biệt",
-  "tinh_huong": "",
-  "hoi_thoai": [],
-  "luyen_cau": [],
-  "tu_vung": []
+  "tinh_huong": "Gặp nhau – chào hỏi – tạm biệt",
+  "hoi_thoai": [
+    {
+      "nhan_vat": "A",
+      "cau": "Hello!",
+      "tv": "Chào bạn!"
+    },
+    {
+      "nhan_vat": "B",
+      "cau": "Hi.",
+      "tv": "Chào bạn!"
+    },
+    {
+      "nhan_vat": "A",
+      "cau": "Goodbye!",
+      "tv": "Tạm biệt!"
+    },
+    {
+      "nhan_vat": "B",
+      "cau": "See you!",
+      "tv": "Hẹn gặp lại!"
+    }
+  ],
+  "luyen_cau": [
+    {
+      "tv": "Chào bạn!",
+      "ta": "Hello!",
+      "ipa": "/həˈloʊ/",
+      "vpm": "hờ – lấu"
+    },
+    {
+      "tv": "Chào bạn!",
+      "ta": "Hi.",
+      "ipa": "/haɪ/",
+      "vpm": "hai"
+    },
+    {
+      "tv": "Tạm biệt!",
+      "ta": "Goodbye!",
+      "ipa": "/ɡʊdˈbaɪ/",
+      "vpm": "gụt – bai"
+    },
+    {
+      "tv": "Hẹn gặp lại!",
+      "ta": "See you!",
+      "ipa": "/si ju/",
+      "vpm": "xi – du"
+    }
+  ],
+  "tu_vung": [
+    {
+      "ta": "hello",
+      "tv": "xin chào",
+      "ipa": "/həˈloʊ/",
+      "vpm": "hờ – lấu"
+    },
+    {
+      "ta": "hi",
+      "tv": "xin chào",
+      "ipa": "/haɪ/",
+      "vpm": "hai"
+    },
+    {
+      "ta": "goodbye",
+      "tv": "tạm biệt",
+      "ipa": "/ɡʊdˈbaɪ/",
+      "vpm": "gụt – bai"
+    },
+    {
+      "ta": "see you",
+      "tv": "hẹn gặp lại",
+      "ipa": "/si ju/",
+      "vpm": "xi – du"
+    }
+  ]
 }
