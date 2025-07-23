@@ -1,10 +1,100 @@
 {
-  "title": "Unit 1: Greetings",
-  "sentences": [
-    "Hello!",
-    "Hi, how are you?",
-    "Good morning.",
-    "Nice to meet you.",
-    "See you later."
+  "title": "Unit 1: Chào hỏi",
+  "tinh_huong": "Bạn gặp ai đó lần đầu tiên hoặc sắp rời đi.",
+  "hoi_thoai": [
+    {
+      "nv": "A",
+      "cau": "**Hello!**"
+    },
+    {
+      "nv": "B",
+      "cau": "**Hi!**"
+    },
+    {
+      "nv": "A",
+      "cau": "**How are you?**"
+    },
+    {
+      "nv": "B",
+      "cau": "**I'm fine, thank you.**"
+    },
+    {
+      "nv": "A",
+      "cau": "**Goodbye!**"
+    },
+    {
+      "nv": "B",
+      "cau": "**See you!**"
+    }
+  ],
+  "luyen_cau": [
+    {
+      "tv": "Xin chào!",
+      "ta": "**Hello!**",
+      "ipa": "/həˈloʊ/",
+      "vpm": "/hờ – lấu/"
+    },
+    {
+      "tv": "Chào!",
+      "ta": "**Hi!**",
+      "ipa": "/haɪ/",
+      "vpm": "/hai/"
+    },
+    {
+      "tv": "Bạn khoẻ không?",
+      "ta": "**How are you?**",
+      "ipa": "/haʊ ɑːr juː/",
+      "vpm": "/hao – a – jiu/"
+    },
+    {
+      "tv": "Tôi khoẻ, cảm ơn.",
+      "ta": "**I'm fine, thank you.**",
+      "ipa": "/aɪm faɪn θæŋk juː/",
+      "vpm": "/aim – phai – thangk – jiu/"
+    },
+    {
+      "tv": "Tạm biệt!",
+      "ta": "**Goodbye!**",
+      "ipa": "/ɡʊdˈbaɪ/",
+      "vpm": "/c(g)ụt – bai/"
+    },
+    {
+      "tv": "Hẹn gặp lại!",
+      "ta": "**See you!**",
+      "ipa": "/siː juː/",
+      "vpm": "/xi – jiu/"
+    }
+  ],
+  "tu_vung": [
+    {
+      "tv": "xin chào",
+      "ta": "**hello**",
+      "ipa": "/həˈloʊ/",
+      "vpm": "/hờ – lấu/"
+    },
+    {
+      "tv": "chào",
+      "ta": "**hi**",
+      "ipa": "/haɪ/",
+      "vpm": "/hai/"
+    },
+    {
+      "tv": "bạn",
+      "ta": "**you**",
+      "ipa": "/juː/",
+      "vpm": "/jiu/"
+    },
+    {
+      "tv": "tạm biệt",
+      "ta": "**goodbye**",
+      "ipa": "/ɡʊdˈbaɪ/",
+      "vpm": "/c(g)ụt – bai/"
+    },
+    {
+      "tv": "gặp lại",
+      "ta": "**see**",
+      "ipa": "/siː/",
+      "vpm": "/xi/"
+    }
   ]
 }
