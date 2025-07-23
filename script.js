@@ -55,58 +55,71 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const reader = new FileReader();
         reader.onload = async () => {
-          const audioContext = new AudioContext();
-          const buffer = await audioContext.decodeAudioData(reader.result);
-          const offlineSource = audioContext.createBufferSource();
-          offlineSource.buffer = buffer;
+          const arrayBuffer = reader.result;
+          const originalContext = new AudioContext();
+          const buffer = await originalContext.decodeAudioData(arrayBuffer);
+
+          const offlineCtx = new OfflineAudioContext(
+            buffer.numberOfChannels,
+            buffer.length,
+            buffer.sampleRate
+          );
+
+          const source = offlineCtx.createBufferSource();
+          source.buffer = buffer;
+
+          const featuresArray = [];
 
           const analyser = Meyda.createMeydaAnalyzer({
-            audioContext: audioContext,
-            source: offlineSource,
-            bufferSize: 1024,
-            featureExtractors: ['rms', 'zcr', 'spectralFlatness', 'spectralCentroid', 'mfcc']
+            audioContext: offlineCtx,
+            source: source,
+            bufferSize: 512,
+            featureExtractors: ['rms', 'zcr', 'spectralFlatness', 'spectralCentroid', 'mfcc'],
+            callback: features => {
+              featuresArray.push(features);
+            }
           });
 
-          offlineSource.connect(audioContext.destination);
+          analyser.start();
+          source.start();
 
-          setTimeout(() => {
-            const features = analyser.get();
-            function safeNumber(x) {
-              return (typeof x === "number" && !isNaN(x)) ? x : 0;
-            }
+          await offlineCtx.startRendering();
 
-            if (features) {
-              const rms = safeNumber(features.rms);
-              const zcr = safeNumber(features.zcr);
-              const flat = safeNumber(features.spectralFlatness);
-              const centroid = safeNumber(features.spectralCentroid);
-              const mfcc = Array.isArray(features.mfcc) ? features.mfcc : [];
-              let score = 0;
+          function mean(arr) {
+            return arr.length ? arr.reduce((a, b) => a + b, 0) / arr.length : 0;
+          }
 
-              let rmsScore = Math.min(1, rms / 0.05) * 20;
-              let zcrScore = Math.max(0, 1 - zcr / 0.2) * 15;
-              let flatScore = Math.max(0, 1 - flat / 0.5) * 15;
-              let centroidScore = (centroid > 200 && centroid < 2000) ? 20 : 10;
-              let mfccScore = mfcc.length > 0 ? 10 : 0;
+          let rmsList = featuresArray.map(f => f.rms || 0);
+          let zcrList = featuresArray.map(f => f.zcr || 0);
+          let flatList = featuresArray.map(f => f.spectralFlatness || 0);
+          let centroidList = featuresArray.map(f => f.spectralCentroid || 0);
+          let mfccList = featuresArray.map(f => f.mfcc || []);
 
-              score = rmsScore + zcrScore + flatScore + centroidScore + mfccScore;
-              scoreBox.textContent = Math.round(score);
-            } else {
-              scoreBox.textContent = "0";
-            }
+          const avg = {
+            rms: mean(rmsList),
+            zcr: mean(zcrList),
+            flat: mean(flatList),
+            centroid: mean(centroidList),
+            mfcc: mean(mfccList.map(m => m.length ? mean(m) : 0))
+          };
 
-            const audio = new Audio(URL.createObjectURL(audioBlob));
-            transcriptBox.textContent = "🔊 Đang phát lại...";
-            replayIcon.className = "bi bi-volume-up";
-            audio.play();
+          let rmsScore = Math.min(1, avg.rms / 0.05) * 20;
+          let zcrScore = Math.max(0, 1 - avg.zcr / 0.2) * 15;
+          let flatScore = Math.max(0, 1 - avg.flat / 0.5) * 15;
+          let centroidScore = (avg.centroid > 200 && avg.centroid < 2000) ? 20 : 10;
+          let mfccScore = avg.mfcc > 0 ? 10 : 0;
 
-            audio.onended = () => {
-              replayIcon.className = "bi bi-arrow-repeat";
-              transcriptBox.textContent = "";
-            };
+          const score = rmsScore + zcrScore + flatScore + centroidScore + mfccScore;
+          scoreBox.textContent = Math.round(score);
 
-            stream.getTracks().forEach(track => track.stop());
-          }, 1000);
+          const audio = new Audio(URL.createObjectURL(audioBlob));
+          transcriptBox.textContent = "🔊 Đang phát lại...";
+          replayIcon.className = "bi bi-volume-up";
+          audio.play();
+          audio.onended = () => {
+            replayIcon.className = "bi bi-arrow-repeat";
+            transcriptBox.textContent = "";
+          };
         };
 
         reader.readAsArrayBuffer(audioBlob);
