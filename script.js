@@ -24,6 +24,27 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   backBtn.addEventListener("click", () => {
+  const downloadedList = document.getElementById("downloadedList");
+  downloadedList.querySelectorAll("a").forEach(link => {
+    link.addEventListener("click", async (e) => {
+      e.preventDefault();
+      const unitFile = link.dataset.unit;
+
+      try {
+        const res = await fetch(unitFile);
+        const data = await res.json();
+
+        // Gọi hàm hiển thị câu
+        renderSentences(data);
+        libraryPanel.classList.add("hidden");
+
+        transcriptBox.textContent = `📝 Đã tải: ${data.title || unitFile}`;
+      } catch (err) {
+        transcriptBox.textContent = `❌ Lỗi tải ${unitFile}`;
+      }
+    });
+  });
+
     libraryPanel.classList.add("hidden");
   });
 
