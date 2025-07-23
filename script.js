@@ -164,7 +164,18 @@ document.addEventListener("DOMContentLoaded", () => {
       e.preventDefault();
       const res = await fetch(link.dataset.unit);
       const data = await res.json();
-      sentenceList.innerHTML = "";
+      
+sentenceList.innerHTML = "";
+unitData.sentences.forEach((sentence, index) => {
+  const item = document.createElement("li");
+  item.innerHTML = `
+    <b>${sentence.en}</b><br>
+    <i>${sentence.vi}</i><br>
+    /${sentence.ipa}/ – ${sentence.vpm}
+  `;
+  sentenceList.appendChild(item);
+});
+
       data.sentences.forEach((sentence, i) => {
         const div = document.createElement("div");
         div.textContent = (i + 1) + ". " + sentence;
