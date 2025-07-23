@@ -166,17 +166,21 @@ document.addEventListener("DOMContentLoaded", () => {
       const data = await res.json();
       
 sentenceList.innerHTML = "";
-unitData.sentences.forEach((sentence, index) => {
-  const item = document.createElement("li");
+data.luyen_cau.forEach((sentence, index) => {
+  const item = document.createElement("div");
   item.innerHTML = `
-    <b>${sentence.en}</b><br>
-    <i>${sentence.vi}</i><br>
+    <b>${sentence.ta}</b><br>
+    <i>${sentence.tv}</i><br>
     /${sentence.ipa}/ – ${sentence.vpm}
   `;
+  item.className = "sentence-item";
+  item.addEventListener("click", () => {
+    currentSentence = sentence.ta;
+    speakSentence(sentence.ta);
+  });
   sentenceList.appendChild(item);
 });
 
-      data.sentences.forEach((sentence, i) => {
         const div = document.createElement("div");
         div.textContent = (i + 1) + ". " + sentence;
         div.className = "sentence-item";
