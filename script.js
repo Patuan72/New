@@ -21,9 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   menuBtn.addEventListener("click", () => {
     libraryPanel.classList.remove("hidden");
-  });
-
-  backBtn.addEventListener("click", () => {
+  
   const downloadedList = document.getElementById("downloadedList");
   downloadedList.querySelectorAll("a").forEach(link => {
     link.addEventListener("click", async (e) => {
@@ -44,7 +42,9 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   });
+});
 
+  backBtn.addEventListener("click", () => {
     libraryPanel.classList.add("hidden");
   });
 
