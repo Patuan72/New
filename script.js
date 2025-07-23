@@ -217,4 +217,45 @@ unitData.sentences.forEach((sentence, index) => {
     utterance.rate = currentRate;
     speechSynthesis.speak(utterance);
   }
+
+  function renderSentences(unitData) {
+    sentenceList.innerHTML = '';
+    unitData.sentences.forEach((s, idx) => {
+      const div = document.createElement('div');
+      div.className = 'sentence-item';
+      div.textContent = typeof s === 'string' ? s : s.text;
+      div.dataset.index = idx;
+
+      div.addEventListener('click', () => {
+        const items = document.querySelectorAll('.sentence-item');
+        items.forEach(item => item.classList.remove('selected'));
+        div.classList.add('selected');
+
+        currentSentence = div.textContent;
+        transcriptBox.textContent = `✅ Đã chọn: ${currentSentence}`;
+      });
+
+      sentenceList.appendChild(div);
+    });
+  }
+
+  const downloadedList = document.getElementById("downloadedList");
+  downloadedList.querySelectorAll("a").forEach(link => {
+    link.addEventListener("click", async (e) => {
+      e.preventDefault();
+      const unitFile = link.dataset.unit;
+
+      try {
+        const res = await fetch(unitFile);
+        const data = await res.json();
+
+        renderSentences(data);
+        libraryPanel.classList.add("hidden");
+        transcriptBox.textContent = `📝 Đã tải: ${data.title || unitFile}`;
+      } catch (err) {
+        transcriptBox.textContent = `❌ Lỗi tải ${unitFile}`;
+      }
+    });
+  });
+
 });
