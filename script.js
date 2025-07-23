@@ -165,24 +165,16 @@ document.addEventListener("DOMContentLoaded", () => {
       const res = await fetch(link.dataset.unit);
       const data = await res.json();
       sentenceList.innerHTML = "";
-      
-      data.sentences.forEach((sentenceObj, i) => {
-        let sentence = typeof sentenceObj === "string" ? sentenceObj : sentenceObj.text;
+      data.sentences.forEach((sentence, i) => {
         const div = document.createElement("div");
         div.textContent = (i + 1) + ". " + sentence;
         div.className = "sentence-item";
         div.addEventListener("click", () => {
           currentSentence = sentence;
-          if (typeof sentenceObj === "object" && sentenceObj.voice) {
-            const audio = new Audio("data:audio/mp3;base64," + sentenceObj.voice);
-            audio.play();
-          } else {
-            speakSentence(sentence);
-          }
+          speakSentence(sentence);
         });
         sentenceList.appendChild(div);
       });
-
       libraryPanel.classList.add("hidden");
     });
   });
