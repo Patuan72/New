@@ -1,3 +1,18 @@
+const sentenceList = document.getElementById("sentenceList");
+const libraryPanel = document.getElementById("library");
+let currentSentence = "";
+
+document.getElementById("menuBtn").addEventListener("click", () => {
+  libraryPanel.classList.remove("hidden");
+});
+document.getElementById("backBtn").addEventListener("click", () => {
+  libraryPanel.classList.add("hidden");
+});
+
+function speakSentence(text) {
+  const utterance = new SpeechSynthesisUtterance(text);
+  speechSynthesis.speak(utterance);
+}
 
 document.querySelectorAll("#downloadedList a").forEach(link => {
   link.addEventListener("click", async e => {
