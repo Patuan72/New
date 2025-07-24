@@ -180,16 +180,6 @@ data.luyen_cau.forEach((sentence, index) => {
   });
   sentenceList.appendChild(item);
 });
-
-        const div = document.createElement("div");
-        div.textContent = (i + 1) + ". " + sentence;
-        div.className = "sentence-item";
-        div.addEventListener("click", () => {
-          currentSentence = sentence;
-          speakSentence(sentence);
-        });
-        sentenceList.appendChild(div);
-      });
       libraryPanel.classList.add("hidden");
     });
   });
